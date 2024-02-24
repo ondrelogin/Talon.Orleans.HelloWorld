@@ -1,0 +1,25 @@
+name: Deploy Server Host to Az App Service
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build_and_run:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4.1.1
+      
+    - name: Setup dotnetcore
+      uses: actions/setup-dotnet@v4.0.0
+      with:
+        dotnet-version: 8.0.x
+        
+    - name: Install dependencies
+      run: dotnet restore src/Talon.Orleans.HelloWorld.sln
+      
+    - name: logon to azure
+      uses: azure/login@v1.6.1
+      with:
+        creds: ${{ secrets.AZ_DEPLOY_CRED }}
