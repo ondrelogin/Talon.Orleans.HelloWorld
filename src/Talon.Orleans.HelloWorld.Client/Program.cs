@@ -21,17 +21,17 @@ internal class Program
     using IHost host = builder.Build();
     await host.StartAsync();
 
+    // connecting to server
+    Console.WriteLine("connecting to grain server...");
+    var grainFactory = host.Services.GetRequiredService<IClusterClient>();
+    var bot = grainFactory.GetGrain<IBot>("num5");
+
     // prompt user for name
     Console.Write("enter your name:");
     string? name = Console.ReadLine();
     Console.WriteLine();
     if (string.IsNullOrWhiteSpace(name)) { name = "No name"; }
     Console.WriteLine();
-
-    // connecting to server
-    Console.WriteLine("connecting to grain server...");
-    var grainFactory = host.Services.GetRequiredService<IClusterClient>();
-    var bot = grainFactory.GetGrain<IBot>("num5");
 
     // getting response
     string response = await bot.SayHello(name);
