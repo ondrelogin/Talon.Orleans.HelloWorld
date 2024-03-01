@@ -15,8 +15,10 @@ internal static class Program
 
     using var host = builder.Build();
 
-    host.MapGet("/", () => "Hello World 2");
-
+    host
+      .UseDefaultFiles()
+      .UseStaticFiles();
+    
     await host.RunAsync();
   }
 }
