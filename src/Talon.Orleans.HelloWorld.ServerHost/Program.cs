@@ -1,8 +1,4 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-
-namespace Talon.Orleans.HelloWorld.ServerHost;
+﻿namespace Talon.Orleans.HelloWorld.ServerHost;
 
 internal static class Program
 {
@@ -15,10 +11,12 @@ internal static class Program
       siloBuilder
         .UseLocalhostClustering()
         .ConfigureLogging(logging => logging.AddConsole());
-      siloBuilder.UseDashboard();
     });
-    
-    using IHost host = builder.Build();
+
+    using var host = builder.Build();
+
+    host.MapGet("/", () => "Hello World");
+
     await host.RunAsync();
   }
 }

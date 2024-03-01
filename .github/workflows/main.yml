@@ -34,4 +34,4 @@ jobs:
       run: az webapp deploy --name ${{ env.SERVER_HOST_NAME }} \
         --resource-group orleans-helloworld-rg \
         --clean true --restart true \
-        --type zip --src-path serverhost.zip
+        --type zip --src-path src/serverhost.zip
