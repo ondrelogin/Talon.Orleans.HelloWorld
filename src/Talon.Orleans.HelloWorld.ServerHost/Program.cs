@@ -15,7 +15,7 @@ internal static class Program
 
     using var host = builder.Build();
 
-    host.MapGet("/", () => "Hello World");
+    host.MapGet("/", () => "Hello World 2");
 
     await host.RunAsync();
   }
