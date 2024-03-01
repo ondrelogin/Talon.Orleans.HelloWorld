@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Hosting;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
 namespace Talon.Orleans.HelloWorld.ServerHost;
@@ -7,15 +8,16 @@ internal static class Program
 {
   static async Task Main(string[] args)
   {
-    var builder = Host.CreateDefaultBuilder(args)
-    .UseOrleans(silo =>
+    var builder = WebApplication.CreateBuilder(args);
+
+    builder.Host.UseOrleans((hostBuilder, siloBuilder) =>
     {
-      silo
+      siloBuilder
         .UseLocalhostClustering()
         .ConfigureLogging(logging => logging.AddConsole());
-    })
-    .UseConsoleLifetime();
-
+      siloBuilder.UseDashboard();
+    });
+    
     using IHost host = builder.Build();
     await host.RunAsync();
   }
