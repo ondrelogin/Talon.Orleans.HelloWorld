@@ -23,3 +23,9 @@ jobs:
       uses: azure/login@v1.6.1
       with:
         creds: ${{ secrets.AZ_DEPLOY_CRED }}
+
+    - name: dotnet publish
+      run: dotnet publish src/Talon.Orleans.HelloWorld.ServerHost/Talon.Orleans.HelloWorld.ServerHost.csproj --configuration Release
+
+    - name: deploy server host
+      run: az webapp deploy --name ${{ vars.WEBSERVER_HOST_NAME }} --resource-group orleans-helloworld-rg --clean true --restart true --type zip --src-path src/serverhost.zip

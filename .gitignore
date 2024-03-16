@@ -3,6 +3,13 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/main/VisualStudio.gitignore
 
+# --------------------------------------------------
+# exclude publish zip file from source control
+
+src/serverhost.zip
+
+# --------------------------------------------------
+
 # User-specific files
 *.rsuser
 *.suo
