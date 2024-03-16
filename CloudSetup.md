@@ -12,7 +12,7 @@ and click the _Cloud Shell_ icon in the top right corner of the navigation.
 
 We will create an Azure Resource Group. You can name it whatever you want,
 the name has to be unique in the Azure Subscription but is not a global
-name. There can be hunderds of people each with their own
+name. There can be hundreds of people each with their own
 `orleans-helloworld-rg` resource group. You can also select an appropriate
 azure region for you.
 
@@ -26,13 +26,48 @@ Copy the "id" part of the json payload that returns the id should be:
 /subscriptions/<sub-guid>/resourceGroups/orleans-helloworld-rg
 ```
 
+## Create Web Plan
+
+We will need a Web Server to provide the communication bridge between the
+Silos (i.e. Orleans Server Nodes) and the Clients. To start we will create
+the minimal deployment of a Web Server. The _"Plan"_ which describes how
+Azure will provision your Web Server. The plan is actually an Azure service
+that hosts other services besides Web Servers. You should adjust the azure
+region, for consistency, the same region as the resource group is
+recommended.
+
+```
+az appservice plan create --resource-group orleans-helloworld-rg --name orleans-helloworld-plan --is-linux --sku F1 --location westus3
+```
+
+You should get a json payload with the various information about the plan
+if the plan was created successfully.
+
+## Create Web Server
+
+Next we will need to create the actual Web Server (i.e. _"Web App"_). Here
+the name provided for the Web App is provided must be unique globally.
+Since this is going to be a dot-net-core 8 WebApp, we will specify that
+string. If this is the future and you want to use a newer version, you can
+use the following Azure CLI command to see what string is appropriate.
+
+```
+az webapp list-runtimes
+```
+
+Run the following command to create the web server.
+
+```
+az webapp create --name talonseverhost --resource-group orleans-helloworld-rg --plan orleans-helloworld-plan --https-only --runtime "DOTNETCORE:8.0"
+```
+
 ## Create Service Principal
 
 Create the Azure Service Principal to grant access to GitHub actions so it
 has the appropriate security to create the resource in Azure. First, the
 _"user"_ account will be created with the following command. It is **very
 important** to grab the `password` value after you create the service
-principal as it isn't stored anyway and there is no way to retrieve it.
+principal as it isn't stored anywhere and there is no way to retrieve it.
 You can change the `--display-name` if you want or not even provide one.
 
 ```
@@ -60,7 +95,7 @@ any rights to do anything. Next we will assign _Roles_ to the Service
 Principal so it will have the correct permissions.
 
 ```
-az role assignment create --assignee "<appId>" --role "Virtual Machine Contributor" --scope "/subscriptions/<subID>/resourceGroups/orleans-helloworld-rg"
+az role assignment create --assignee "<appId>" --role "Website Contributor --scope "/subscriptions/<subID>/resourceGroups/orleans-helloworld-rg"
 ```
 
 The `<appId>` is the guid that was specified in the previous step when the
