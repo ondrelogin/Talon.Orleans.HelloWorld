@@ -55,7 +55,8 @@ use the following Azure CLI command to see what string is appropriate.
 az webapp list-runtimes
 ```
 
-Run the following command to create the web server.
+Run the following command to create the web server. Be sure to change the
+value of the `--name` to what you want to name your webserver url.
 
 ```
 az webapp create --name talonseverhost --resource-group orleans-helloworld-rg --plan orleans-helloworld-plan --https-only --runtime "DOTNETCORE:8.0"
@@ -99,14 +100,14 @@ az role assignment create --assignee "<appId>" --role "Website Contributor --sco
 ```
 
 The `<appId>` is the guid that was specified in the previous step when the
-Service Principal was created. `Virtual Machine Contributor` is a
-predefined role that grants a set of permissions. Scope is required and in
-this example it is limited to a specific resource group.
+Service Principal was created. `Website Contributor` is a predefined role
+that grants a set of permissions. Scope is required and in this example it
+is limited to a specific resource group.
 
 ## Configure GitHub Secret
 
 On the GitHub repo for this project, navigate to the _Settings_ tab and
-then select [Secrets and variables/Actions](settings/secrets/actions).
+then browse to `https://github.com/<youraccount>/Talon.Orleans.HelloWorld/settings/secrets/actions`
 Click the _"New repository secret"_ button to create the encrypted secret.
 For use with the configured GitHub actions you will need to name the secret
 `AZ_DEPLOY_CRED`. The json that has to be saved as the secret is slightly
@@ -131,3 +132,16 @@ look similar to:
   "clientId": "<unique-guid-for-this-service-principal>"
 }
 ```
+
+On the same _Actions secrets and variables_ page, select the `Variables`
+tab (next to the _Secrets_ tab). Click the _"New repository variable"_
+button, with the name `WEBSERVER_HOST_NAME` and the value of the `--name`
+used in the `az webapp create` CLI operation. Here is an example of what my
+_Repository variables_ table looks like.
+
+| Name                | Value          |
+| ------------------- | -------------- |
+| WEBSERVER_HOST_NAME | talonseverhost |
+
+Once this is setup you should be able to run the _"Deploy Server Host to Az
+App Service"_ GitHub action and have a running web app in the Azure Cloud.
