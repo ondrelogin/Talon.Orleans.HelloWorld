@@ -23,6 +23,14 @@ internal static class Program
       .UseStaticFiles();
     host.MapControllers();
 
+#if DEBUG
+    if (host.Environment.IsDevelopment())
+    {
+      host.UseSwagger();
+      host.UseSwaggerUI();
+    }
+#endif
+
     await host.RunAsync();
   }
 
@@ -32,6 +40,7 @@ internal static class Program
     return builder.ConfigureServices(svcs =>
     {
       svcs.AddControllers();
+      svcs.AddSwaggerGen();
     });
   }
 }
