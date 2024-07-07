@@ -15,7 +15,7 @@ internal static class Program
         .UseLocalhostClustering()
         .ConfigureLogging(logging => logging.AddConsole());
     });
-
+    
     using var host = builder.Build();
 
     host
@@ -30,7 +30,6 @@ internal static class Program
       host.UseSwaggerUI();
     }
 #endif
-
     await host.RunAsync();
   }
 

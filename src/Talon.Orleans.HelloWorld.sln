@@ -3,13 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34525.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Talon.Orleans.HelloWorld.Common", "Talon.Orleans.HelloWorld.Common\Talon.Orleans.HelloWorld.Common.csproj", "{3B9DB78E-FDC4-4F91-9A6A-025CB4849163}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Talon.Orleans.HelloWorld.Common", "Talon.Orleans.HelloWorld.Common\Talon.Orleans.HelloWorld.Common.csproj", "{3B9DB78E-FDC4-4F91-9A6A-025CB4849163}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Talon.Orleans.HelloWorld.Grains", "Talon.Orleans.HelloWorld.Grains\Talon.Orleans.HelloWorld.Grains.csproj", "{AE4EF896-0804-4FCA-8EC4-4AC26D6859A3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Talon.Orleans.HelloWorld.Grains", "Talon.Orleans.HelloWorld.Grains\Talon.Orleans.HelloWorld.Grains.csproj", "{AE4EF896-0804-4FCA-8EC4-4AC26D6859A3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Talon.Orleans.HelloWorld.Client", "Talon.Orleans.HelloWorld.Client\Talon.Orleans.HelloWorld.Client.csproj", "{4CC0F883-AD68-489B-81F6-3AD1BAB9F60D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Talon.Orleans.HelloWorld.Client", "Talon.Orleans.HelloWorld.Client\Talon.Orleans.HelloWorld.Client.csproj", "{4CC0F883-AD68-489B-81F6-3AD1BAB9F60D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Talon.Orleans.HelloWorld.ServerHost", "Talon.Orleans.HelloWorld.ServerHost\Talon.Orleans.HelloWorld.ServerHost.csproj", "{A86B95DF-9969-4491-9A9E-CA406989B9B8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Talon.Orleans.HelloWorld.ServerHost", "Talon.Orleans.HelloWorld.ServerHost\Talon.Orleans.HelloWorld.ServerHost.csproj", "{A86B95DF-9969-4491-9A9E-CA406989B9B8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F5B91E1C-1831-49F7-849D-E9EBFB7B17AC}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
